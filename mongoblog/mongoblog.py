@@ -9,6 +9,7 @@ def req_start():
     g.mongo = pymongo.Connection()
 
 def req_end(response):
+    g.mongo.disconnect()
     del g.mongo
     return response
 
