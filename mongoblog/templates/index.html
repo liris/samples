@@ -13,6 +13,7 @@
      <input type="submit" value="edit"/>
     </form>
     <form action="{{ url_for('delete') }}" method="post" style="float:left">
+      <input type="hidden" name="oid" value="{{ entry['_id'] }}" />
       <input type="submit" value="delete"/>
     </form>
     <br clear="all"/>

@@ -65,7 +65,7 @@ def delete():
         entry = db.entry.find_one({"_id": ObjectId(oid)})
         db.entry.remove(entry)
         
-    redirect(url_for("index"))
+    return redirect(url_for("index"))
    
 if __name__ == "__main__":
     app.run()
