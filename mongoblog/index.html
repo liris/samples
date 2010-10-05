@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Mongo Blog</title>
+</head>
+<body>
+<h1><a href="{{ url_for('index') }}">Mongo Blog</a></h1>
+<hr />
+<a href="{{ url_for('edit') }}">New</a>
+{% for entry in entries %}
+  <div>
+    <h2><a href="{{  url_for('index', oid=entry['_id'])  }}">{{ entry["title"] }}</a></h2>
+    <form action="{{ url_for('edit', oid=entry['_id']) }}" style="float:left">
+     <input type="submit" value="edit"/>
+    </form>
+    <form action="{{ url_for('delete') }}" method="post" style="float:left">
+      <input type="submit" value="delete"/>
+    </form>
+    <br clear="all"/>
+    <div>
+      {% for line in entry.get("body", "").splitlines() %}
+        {{ line }}<br/>
+      {% endfor %}
+    </div>
+  </div>
+{% endfor %}
+</body>
+</html>
+
