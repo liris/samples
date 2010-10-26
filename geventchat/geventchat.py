@@ -4,18 +4,16 @@ import gevent
 
 chat_clients = set()
 
-def handle(ws):
-    if ws.path == "/chat":
-        chat_clients.add(ws)
-        while True:
-            message = ws.wait()
-            if message is None:
-                break
-            # TODO: send to all
-            for client in chat_clients:
-                client.send(message)
+def handle_chat(ws):
+    chat_clients.add(ws)
+    while True:
+        message = ws.wait()
+        if message is None:
+            break
+        for client in chat_clients:
+            client.send(message)
 
-        chat_clients.remove(ws)
+    chat_clients.remove(ws)
 
 def app(environ, start_response):
     path = environ["PATH_INFO"]
@@ -23,7 +21,7 @@ def app(environ, start_response):
         start_response("200 OK", [("Content-Type", "text/plain")])
         return ["start"]
     elif path == "/chat":
-        handle(environ["wsgi.websocket"])
+        handle_chat(environ["wsgi.websocket"])
     else:
         start_response("404 Not Found", [])
         return []

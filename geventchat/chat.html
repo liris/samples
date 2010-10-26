@@ -1,0 +1,25 @@
+<html>
+<head><title>Web Socket Chat</title></head>
+<body>
+<script>
+var ws = new WebSocket("ws://127.0.0.1:5000/chat");
+ws.onopen = function() {
+};
+
+ws.onmessage = function(message) {
+ var txtNode = document.createTextNode(message.data);
+ var brNode = document.createElement('br');
+ var cnode = document.getElementById("content");
+ cnode.appendChild(txtNode);
+ cnode.appendChild(brNode);
+};
+$(window).unload(function(){
+  ws.close();
+});
+</script>
+<h1>Web Socket Chat</h1>
+<div id="content">
+</div>
+<input id="message" type="text" onChange="javascript:ws.send(this.value);this.value='';"/>
+</body>
+</html>
