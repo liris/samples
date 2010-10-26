@@ -13,9 +13,9 @@ ws.onmessage = function(message) {
  cnode.appendChild(txtNode);
  cnode.appendChild(brNode);
 };
-$(window).unload(function(){
+window.onunload = function(){
   ws.close();
-});
+};
 </script>
 <h1>Web Socket Chat</h1>
 <div id="content">

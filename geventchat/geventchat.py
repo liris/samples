@@ -18,8 +18,8 @@ def handle_chat(ws):
 def app(environ, start_response):
     path = environ["PATH_INFO"]
     if path == "/":
-        start_response("200 OK", [("Content-Type", "text/plain")])
-        return ["start"]
+        start_response("200 OK", [("Content-Type", "text/html")])
+        return open("chat.html").readlines()
     elif path == "/chat":
         handle_chat(environ["wsgi.websocket"])
     else:
