@@ -15,7 +15,7 @@ public class fibo {
     public static void main(String[] argv) {
         long start = System.currentTimeMillis();
         for (int i=0; i<30; i++) {
-            System.out.println(fibonacci(new BigInteger(String.valueOf(i))));
+            fibonacci(new BigInteger(String.valueOf(i)));
         }
         long end = System.currentTimeMillis();
         System.out.println(1.0*(end - start)/1000);
